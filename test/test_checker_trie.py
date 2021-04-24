@@ -1,7 +1,7 @@
 import pytest
 from typing import Optional
 
-from src.checker_set import ETLDChecker
+from src.checker_trie import ETLDChecker
 
 @pytest.fixture(scope='module', autouse=True)
 def checkPublicSuffix():
@@ -10,6 +10,7 @@ def checkPublicSuffix():
 
     def checkPublicSuffixImpl(domain: str) -> Optional[str]:
         result = checker.check(domain)
+        print(result)
         return result.data.root_domain if result.is_valid else None
 
     return checkPublicSuffixImpl
