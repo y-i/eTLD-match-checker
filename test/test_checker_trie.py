@@ -11,7 +11,7 @@ def checkPublicSuffix():
     def checkPublicSuffixImpl(domain: str) -> Optional[str]:
         result = checker.check(domain)
         print(result)
-        return result.data.domain if result.is_valid else None
+        return result.data.root_domain if result.is_valid else None
 
     return checkPublicSuffixImpl
 

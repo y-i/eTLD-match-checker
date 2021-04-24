@@ -10,10 +10,7 @@ def checkPublicSuffix():
 
     def checkPublicSuffixImpl(domain: str) -> Optional[str]:
         result = checker.check(domain)
-        if result.is_valid:
-            return result.data.domain
-        else:
-            return None
+        return result.data.root_domain if result.is_valid else None
 
     return checkPublicSuffixImpl
 

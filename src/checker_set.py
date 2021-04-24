@@ -29,7 +29,7 @@ class ETLDChecker(Checker):
                         is_valid=True,
                         data=DomainData(
                             subdomain='.'.join(subdomains),
-                            domain='.'.join(reversed(words)),
+                            root_domain='.'.join(reversed(words)),
                             etld='.'.join(reversed(words[:-1])),
                             tld=words[0],
                         ),
@@ -44,7 +44,7 @@ class ETLDChecker(Checker):
                         is_valid=True,
                         data=DomainData(
                             subdomain='.'.join(subdomains[:-2]),
-                            domain='.'.join(domain_words),
+                            root_domain='.'.join(domain_words),
                             etld='.'.join(domain_words[1:]),
                             tld=words[0],
                         ),
@@ -59,7 +59,7 @@ class ETLDChecker(Checker):
                         is_valid=True,
                         data=DomainData(
                             subdomain='.'.join(subdomains[:-1]),
-                            domain='.'.join(domain_words),
+                            root_domain='.'.join(domain_words),
                             etld='.'.join(domain_words[1:]),
                             tld=words[0],
                         ),

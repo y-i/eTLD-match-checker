@@ -4,7 +4,7 @@ from dataclasses import dataclass
 @dataclass
 class DomainData:
     subdomain: str
-    domain: str
+    root_domain: str
     etld: str
     tld: str
 
