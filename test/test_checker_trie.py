@@ -6,7 +6,7 @@ from src.checker_trie import ETLDChecker
 @pytest.fixture(scope='module', autouse=True)
 def checkPublicSuffix():
     checker = ETLDChecker()
-    checker.initialize_from_file('list.dat')
+    checker.initialize_from_file('test/list.dat')
 
     def checkPublicSuffixImpl(domain: str) -> Optional[str]:
         result = checker.check(domain)

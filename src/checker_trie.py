@@ -1,5 +1,7 @@
 from typing import List, Mapping, Optional
+
 from src.domain import DomainData, DomainResult
+from src.checker import Checker
 
 class TrieNode:
     def __init__(self):
@@ -45,7 +47,7 @@ class Trie:
             node = node.add(word)
         node.is_end = True
 
-class ETLDChecker:
+class ETLDChecker(Checker):
     def __init__(self) -> None:
         self.exception_suffix_list = Trie()
         self.wildcard_suffix_list = Trie()

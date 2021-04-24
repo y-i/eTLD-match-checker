@@ -1,10 +1,21 @@
 import pytest
+from typing import Optional
 
-from src.checker_set import checkPublicSuffix, create_set
+from src.checker_set import ETLDChecker
 
 @pytest.fixture(scope='module', autouse=True)
-def befoe_after_test():
-    create_set()
+def checkPublicSuffix():
+    checker = ETLDChecker()
+    checker.initialize_from_file('test/list.dat')
+
+    def checkPublicSuffixImpl(domain: str) -> Optional[str]:
+        result = checker.check(domain)
+        if result.is_valid:
+            return result.data.domain
+        else:
+            return None
+
+    return checkPublicSuffixImpl
 
 class TestNone:
     data = [
@@ -12,7 +23,7 @@ class TestNone:
     ]
 
     @pytest.mark.parametrize("domain, etld", data)
-    def test(self, domain: str, etld: str):
+    def test(self, domain: str, etld: str, checkPublicSuffix):
         assert checkPublicSuffix(domain) == etld
 
 class TestMixed:
@@ -23,7 +34,7 @@ class TestMixed:
     ]
 
     @pytest.mark.parametrize("domain, etld", data)
-    def test(self, domain: str, etld: str):
+    def test(self, domain: str, etld: str, checkPublicSuffix):
         assert checkPublicSuffix(domain) == etld
 
 class TestLeadingDot:
@@ -35,7 +46,7 @@ class TestLeadingDot:
     ]
 
     @pytest.mark.parametrize("domain, etld", data)
-    def test(self, domain: str, etld: str):
+    def test(self, domain: str, etld: str, checkPublicSuffix):
         assert checkPublicSuffix(domain) == etld
 
 @pytest.mark.skip(reason='NOT Implemented')
@@ -48,7 +59,7 @@ class TestUnlistedTLD:
     ]
 
     @pytest.mark.parametrize("domain, etld", data)
-    def test(self, domain: str, etld: str):
+    def test(self, domain: str, etld: str, checkPublicSuffix):
         assert checkPublicSuffix(domain) == etld
 
 @pytest.mark.skip(reason='Commented out')
@@ -61,7 +72,7 @@ class TestListedButNotInternetTLD:
     ]
 
     @pytest.mark.parametrize("domain, etld", data)
-    def test(self, domain: str, etld: str):
+    def test(self, domain: str, etld: str, checkPublicSuffix):
         assert checkPublicSuffix(domain) == etld
 
 class TestOnly1Rules:
@@ -73,7 +84,7 @@ class TestOnly1Rules:
     ]
 
     @pytest.mark.parametrize("domain, etld", data)
-    def test(self, domain: str, etld: str):
+    def test(self, domain: str, etld: str, checkPublicSuffix):
         assert checkPublicSuffix(domain) == etld
 
 class TestSome2LevelRules:
@@ -90,7 +101,7 @@ class TestSome2LevelRules:
     ]
 
     @pytest.mark.parametrize("domain, etld", data)
-    def test(self, domain: str, etld: str):
+    def test(self, domain: str, etld: str, checkPublicSuffix):
         assert checkPublicSuffix(domain) == etld
 
 class TestOnly1WildcardRules:
@@ -102,7 +113,7 @@ class TestOnly1WildcardRules:
     ]
 
     @pytest.mark.parametrize("domain, etld", data)
-    def test(self, domain: str, etld: str):
+    def test(self, domain: str, etld: str, checkPublicSuffix):
         assert checkPublicSuffix(domain) == etld
 
 class TestMoreComplexTLD:
@@ -126,7 +137,7 @@ class TestMoreComplexTLD:
     ]
 
     @pytest.mark.parametrize("domain, etld", data)
-    def test(self, domain: str, etld: str):
+    def test(self, domain: str, etld: str, checkPublicSuffix):
         assert checkPublicSuffix(domain) == etld
 
 class TestAWildcardRuleAndExceptions:
@@ -140,7 +151,7 @@ class TestAWildcardRuleAndExceptions:
     ]
 
     @pytest.mark.parametrize("domain, etld", data)
-    def test(self, domain: str, etld: str):
+    def test(self, domain: str, etld: str, checkPublicSuffix):
         assert checkPublicSuffix(domain) == etld
 
 class TestUSK12:
@@ -157,7 +168,7 @@ class TestUSK12:
     ]
 
     @pytest.mark.parametrize("domain, etld", data)
-    def test(self, domain: str, etld: str):
+    def test(self, domain: str, etld: str, checkPublicSuffix):
         assert checkPublicSuffix(domain) == etld
 
 class TestIDNLabels:
@@ -174,7 +185,7 @@ class TestIDNLabels:
     ]
 
     @pytest.mark.parametrize("domain, etld", data)
-    def test(self, domain: str, etld: str):
+    def test(self, domain: str, etld: str, checkPublicSuffix):
         assert checkPublicSuffix(domain) == etld
 
 @pytest.mark.skip(reason='NOT Implemented')
@@ -192,5 +203,5 @@ class TestSameAsAboveButPunycoded:
     ]
 
     @pytest.mark.parametrize("domain, etld", data)
-    def test(self, domain: str, etld: str):
+    def test(self, domain: str, etld: str, checkPublicSuffix):
         assert checkPublicSuffix(domain) == etld
