@@ -1,26 +1,28 @@
-from typing import List, Mapping, Optional
+from typing import Dict, List, Optional
 
-from src.domain import DomainData, DomainResult
 from src.checker import Checker
+from src.domain import DomainData, DomainResult
+
 
 class TrieNode:
-    def __init__(self):
-        self.nodes: Mapping[str, TrieNode] = dict()
+    def __init__(self) -> None:
+        self.nodes: Dict[str, TrieNode] = dict()
         self.is_end = False
 
     def has(self, word: str) -> bool:
         return word in self.nodes
 
-    def get(self, word: str) -> 'TrieNode':
+    def get(self, word: str) -> "TrieNode":
         return self.nodes[word]
 
-    def add(self, word: str) -> 'TrieNode':
+    def add(self, word: str) -> "TrieNode":
         if not word in self.nodes:
             self.nodes[word] = TrieNode()
         return self.nodes[word]
 
+
 class Trie:
-    def __init__(self):
+    def __init__(self) -> None:
         self.root = TrieNode()
 
     def search(self, words: List[str]) -> int:
@@ -47,7 +49,8 @@ class Trie:
             node = node.add(word)
         node.is_end = True
 
-class ETLDChecker(Checker):
+
+class ETLDChecker(Checker): # type: ignore
     def __init__(self) -> None:
         self.exception_suffix_list = Trie()
         self.wildcard_suffix_list = Trie()
@@ -59,7 +62,7 @@ class ETLDChecker(Checker):
         if domain is None:
             return none_result
 
-        words = domain.lower().split('.')
+        words = domain.lower().split(".")
         if any(map(lambda x: len(x) == 0, words)):
             return none_result
 
@@ -68,9 +71,9 @@ class ETLDChecker(Checker):
             return DomainResult(
                 is_valid=True,
                 data=DomainData(
-                    subdomain='.'.join(words[:-suffix_len-1]),
-                    root_domain='.'.join(words[-suffix_len-1:]),
-                    etld='.'.join(reversed(words[-suffix_len:])),
+                    subdomain=".".join(words[: -suffix_len - 1]),
+                    root_domain=".".join(words[-suffix_len - 1 :]),
+                    etld=".".join(reversed(words[-suffix_len:])),
                     tld=words[-1],
                 ),
             )
@@ -82,9 +85,9 @@ class ETLDChecker(Checker):
             return DomainResult(
                 is_valid=True,
                 data=DomainData(
-                    subdomain='.'.join(words[:-suffix_len-1]),
-                    root_domain='.'.join(words[-suffix_len-1:]),
-                    etld='.'.join(reversed(words[-suffix_len:])),
+                    subdomain=".".join(words[: -suffix_len - 1]),
+                    root_domain=".".join(words[-suffix_len - 1 :]),
+                    etld=".".join(reversed(words[-suffix_len:])),
                     tld=words[-1],
                 ),
             )
@@ -96,9 +99,9 @@ class ETLDChecker(Checker):
             return DomainResult(
                 is_valid=True,
                 data=DomainData(
-                    subdomain='.'.join(words[:-suffix_len-1]),
-                    root_domain='.'.join(words[-suffix_len-1:]),
-                    etld='.'.join(reversed(words[-suffix_len:])),
+                    subdomain=".".join(words[: -suffix_len - 1]),
+                    root_domain=".".join(words[-suffix_len - 1 :]),
+                    etld=".".join(reversed(words[-suffix_len:])),
                     tld=words[-1],
                 ),
             )
@@ -106,12 +109,12 @@ class ETLDChecker(Checker):
         return none_result
 
     def initialize_from_file(self, filename: str) -> None:
-        with open(filename, encoding='utf-8') as f:
+        with open(filename, encoding="utf-8") as f:
             for line in f:
                 suffix = line.strip()
-                if suffix[0] == '!':
-                    self.exception_suffix_list.add(suffix[1:].split('.'))
-                elif suffix[0] == '*':
-                    self.wildcard_suffix_list.add(suffix[2:].split('.'))
+                if suffix[0] == "!":
+                    self.exception_suffix_list.add(suffix[1:].split("."))
+                elif suffix[0] == "*":
+                    self.wildcard_suffix_list.add(suffix[2:].split("."))
                 else:
-                    self.normal_suffix_list.add(suffix.split('.'))
+                    self.normal_suffix_list.add(suffix.split("."))
