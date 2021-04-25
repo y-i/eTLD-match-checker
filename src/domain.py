@@ -1,5 +1,6 @@
-from typing import Optional
 from dataclasses import dataclass
+from typing import Optional
+
 
 @dataclass
 class DomainData:
@@ -7,6 +8,7 @@ class DomainData:
     root_domain: str
     etld: str
     tld: str
+
 
 @dataclass
 class DomainResult:
