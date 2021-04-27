@@ -73,7 +73,7 @@ class ETLDChecker(Checker):  # type: ignore
                 data=DomainData(
                     subdomain=".".join(words[: -suffix_len - 1]),
                     root_domain=".".join(words[-suffix_len - 1 :]),
-                    etld=".".join(reversed(words[-suffix_len:])),
+                    etld=".".join(words[-suffix_len:]),
                     tld=words[-1],
                 ),
             )
@@ -87,7 +87,7 @@ class ETLDChecker(Checker):  # type: ignore
                 data=DomainData(
                     subdomain=".".join(words[: -suffix_len - 1]),
                     root_domain=".".join(words[-suffix_len - 1 :]),
-                    etld=".".join(reversed(words[-suffix_len:])),
+                    etld=".".join(words[-suffix_len:]),
                     tld=words[-1],
                 ),
             )
@@ -101,7 +101,7 @@ class ETLDChecker(Checker):  # type: ignore
                 data=DomainData(
                     subdomain=".".join(words[: -suffix_len - 1]),
                     root_domain=".".join(words[-suffix_len - 1 :]),
-                    etld=".".join(reversed(words[-suffix_len:])),
+                    etld=".".join(words[-suffix_len:]),
                     tld=words[-1],
                 ),
             )
