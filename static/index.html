@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eTLD Checker</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.20/dist/css/uikit.min.css" />
+    <style>
+        #container {
+            height: 90%;
+            width: 600px;
+            max-width: 720px;
+        }
+    </style>
+    <script defer src="https://cdn.jsdelivr.net/npm/uikit@3.6.20/dist/js/uikit.min.js" integrity="sha256-ntRRGWdIr5IjxXb/Se4IjIfRMmRwV652r9mEy00ZdMw=" crossorigin="anonymous"></script>
+    <script defer src="/static/script.js"></script>
+</head>
+<body>
+    <div id="container" class="uk-flex uk-flex-column uk-position-center uk-panel uk-panel-scrollable uk-width-xlarge uk-margin-top uk-margin-bottom uk-margin-left uk-margin-right">
+        <div uk-sticky class="uk-flex uk-flex-column uk-text-center">
+            <h1 class="uk-heading-small">eTLD Checker</h1>
+        </div>
+        <div>
+            <form class="uk-form-horizontal">
+                <div uk-grid>
+                    <div class="uk-width-expand">
+                        <input type="text" class="uk-input" id="domain" placeholder="example.com" />
+                    </div>
+                    <div class="uk-width-auto">
+                        <button type="submit" class="uk-button uk-button-primary" id="check">Check</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <hr>
+        <div>
+            <table class="uk-table uk-table-divider uk-text-center">
+                <caption id="caption"></caption>
+                <thead>
+                    <tr>
+                        <th class="uk-text-center">Key</th>
+                        <th class="uk-text-center">Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Sub Domain</td>
+                        <td id="subdomain"></td>
+                    </tr>
+                    <tr>
+                        <td>Root Domain</td>
+                        <td id="rootdomain"></td>
+                    </tr>
+                    <tr>
+                        <td>eTLD</td>
+                        <td id="etld"></td>
+                    </tr>
+                    <tr>
+                        <td>TLD</td>
+                        <td id="tld"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
