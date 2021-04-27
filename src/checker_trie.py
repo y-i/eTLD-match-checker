@@ -16,7 +16,7 @@ class TrieNode:
         return self.nodes[word]
 
     def add(self, word: str) -> "TrieNode":
-        if not word in self.nodes:
+        if word not in self.nodes:
             self.nodes[word] = TrieNode()
         return self.nodes[word]
 
@@ -50,7 +50,7 @@ class Trie:
         node.is_end = True
 
 
-class ETLDChecker(Checker): # type: ignore
+class ETLDChecker(Checker):  # type: ignore
     def __init__(self) -> None:
         self.exception_suffix_list = Trie()
         self.wildcard_suffix_list = Trie()
