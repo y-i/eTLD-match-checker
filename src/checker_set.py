@@ -5,7 +5,7 @@ from src.checker import Checker
 from src.domain import DomainData, DomainResult
 
 
-class ETLDChecker(Checker): # type: ignore
+class ETLDChecker(Checker):  # type: ignore
     def __init__(self) -> None:
         self.exception_suffix_list: MutableSet[str] = set()
         self.wildcard_suffix_list: MutableSet[str] = set()

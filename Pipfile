@@ -4,17 +4,23 @@ verify_ssl = true
 name = "pypi"
 
 [scripts]
-test = "pytest --durations=5 --cov-report term-missing --cov=src"
-lint = "pysen run lint"
 format = "pysen run format"
+lint = "pysen run lint"
+server = "uvicorn src.server.main:app --reload --reload-dir src/*"
+test = "pytest --durations=5 --cov-report term-missing --cov=src"
 
 [packages]
+fastapi = "*"
+aiofiles = "*"
 
 [dev-packages]
 pytest = "*"
 pytest-cov = "*"
 pysen = {version = "==0.9.1", extras = ["lint"]}
 pytest-randomly = "*"
+requests = "*"
+uvicorn = {extras = ["standard"], version = "*"}
+pipdeptree = "*"
 
 [requires]
 python_version = "3.9"
