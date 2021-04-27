@@ -1,0 +1,24 @@
+{
+  "version": 2,
+  "functions": {
+    "api/main.py": {
+      "memory": 1024,
+      "maxDuration": 10
+    }
+  },
+  "public": false,
+  "cleanUrls": false,
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/view-source",
+      "destination": "https://github.com/y-i/eTLD-match-checker"
+    }
+  ],
+  "rewrites": [
+    { "source": "/", "destination": "/static/index.html" },
+    { "source": "/index.html", "destination": "/static/index.html" },
+    { "source": "/script.js", "destination": "/static/script.js" },
+    { "source": "/:match*", "destination": "/api/main.py" }
+  ]
+}
