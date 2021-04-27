@@ -1,0 +1,37 @@
+name: Auto deploy to vercel
+
+on:
+  schedule:
+    - cron: "0 13 */3 0 0"
+
+jobs:
+  fetch-ranking:
+    name: Deploy yo vercel
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Set up Node.js v14
+        uses: actions/setup-node@v1
+        with:
+          node-version: "14.x"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pipenv --upgrade-strategy=only-if-needed
+          pipenv install --dev
+
+      - name: Update list and create pickle
+        run: |
+          curl https://publicsuffix.org/list/public_suffix_list.dat | sed '/^$/d' | grep -v -- "//" > .gihub/ci/list.dat
+          python .github/ci/to_pickle.py
+
+      - name: Deploy to vercel
+        run: |
+          mkdir .vercel
+          echo {\"orgId\": \"${{secrets.VERCEL_ORG_ID}}\", \"projectId\": \"${{secrets.VERCEL_PROJECT_ID}}\"} > .vercel/project.json
+          npx vercel --token ${{secrets.VERCEL_TOKEN}} --prod
