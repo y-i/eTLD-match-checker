@@ -2,7 +2,7 @@ name: Auto deploy to vercel
 
 on:
   schedule:
-    - cron: "5 15 */2 * *"
+    - cron: "55 15 */2 * *"
 
 jobs:
   fetch-ranking:
@@ -27,7 +27,7 @@ jobs:
 
       - name: Update list and create pickle
         run: |
-          curl https://publicsuffix.org/list/public_suffix_list.dat | tac | sed '/^$/d' | grep -v -- "//" > .gihub/ci/list.dat
+          curl https://publicsuffix.org/list/public_suffix_list.dat | tac | sed '/^$/d' | grep -v -- "//" > .github/ci/list.dat
           python .github/ci/to_pickle.py
 
       - name: Deploy to vercel
