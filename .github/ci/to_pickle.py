@@ -1,4 +1,8 @@
+import sys
 import pickle
+from pathlib import Path
+
+sys.path.append(str(Path('__file__').resolve().parent))
 
 from src.checker_trie import ETLDChecker
 

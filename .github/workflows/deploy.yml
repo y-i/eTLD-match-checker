@@ -2,7 +2,7 @@ name: Auto deploy to vercel
 
 on:
   schedule:
-    - cron: "55 15 */2 * *"
+    - cron: "35 16 */2 * *"
 
 jobs:
   fetch-ranking:
