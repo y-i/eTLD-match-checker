@@ -8,7 +8,6 @@
   },
   "public": false,
   "cleanUrls": false,
-  "trailingSlash": true,
   "redirects": [
     {
       "source": "/view-source",
