@@ -1,12 +1,21 @@
 # eTLD-match-checker
 
 ![cheker badge](https://github.com/y-i/eTLD-match-checker/actions/workflows/checker.yml/badge.svg)
+[![Auto deploy to vercel](https://github.com/y-i/eTLD-match-checker/actions/workflows/deploy.yml/badge.svg)](https://github.com/y-i/eTLD-match-checker/actions/workflows/deploy.yml)
 
 ## Set up
 
 - `git clone git@github.com:y-i/eTLD-match-checker.git`
-- `curl https://publicsuffix.org/list/public_suffix_list.dat | sed '/^$/d' | grep -v -- "//" > list.dat`
+- `curl https://publicsuffix.org/list/public_suffix_list.dat | sed '/^$/d' | grep -v -- "//" > files/list.dat`
 - `pipenv install --dev`
+
+## How to use
+- `pipenv run server`
+- Go to http://localhost:8000/
+
+## Document
+- [OpenAPI](http://localhost:8000/docs)
+- [ReDoc](http://localhost:8000/redoc)
 
 ## Test
 - `pipenv run pytest`
