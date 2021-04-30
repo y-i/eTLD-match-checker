@@ -19,8 +19,9 @@
     { "source": "/index.html", "destination": "/static/index.html" },
     { "source": "/script.js", "destination": "/static/script.js" },
     { "source": "/check/", "destination": "/api/main.py" },
-    { "source": "/docs/", "destination": "/api/main.py" },
-    { "source": "/redoc/", "destination": "/api/main.py" },
+    { "source": "/check/:domain*", "destination": "/api/main.py" },
+    { "source": "/docs", "destination": "/api/main.py" },
+    { "source": "/redoc", "destination": "/api/main.py" },
     { "source": "/openapi.json", "destination": "/api/main.py" }
   ]
 }
