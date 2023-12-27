@@ -1,37 +1,15 @@
-name: Auto deploy to vercel
+name: Auto deploy to render
 
 on:
   schedule:
     - cron: "35 16 */2 * *"
 
 jobs:
-  fetch-ranking:
-    name: Deploy yo vercel
+  deploy:
+    name: Deploy to render.com
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python 3.10
-        uses: actions/setup-python@v2
+      - uses: ttskch/render-deploy@v1.0.0
         with:
-          python-version: "3.10"
-      - name: Set up Node.js v14
-        uses: actions/setup-node@v1
-        with:
-          node-version: "14.x"
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install pipenv --upgrade-strategy=only-if-needed
-          pipenv install --dev
-
-      - name: Update list and create pickle
-        run: |
-          curl https://publicsuffix.org/list/public_suffix_list.dat | tac | sed '/^$/d' | grep -v -- "//" > .github/ci/list.dat
-          python .github/ci/to_pickle.py
-
-      - name: Deploy to vercel
-        run: |
-          mkdir .vercel
-          echo {\"orgId\": \"${{secrets.VERCEL_ORG_ID}}\", \"projectId\": \"${{secrets.VERCEL_PROJECT_ID}}\"} > .vercel/project.json
-          npx vercel --token ${{secrets.VERCEL_TOKEN}} --prod
+          api-key: ${{ secrets.RENDER_API_KEY }}
+          service-id: ${{ secrets.RENDER_SERVICE_ID }}
