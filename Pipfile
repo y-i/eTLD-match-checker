@@ -13,6 +13,7 @@ test = "pytest --durations=5 --cov-report term-missing --cov=src"
 fastapi = "*"
 aiofiles = "*"
 pysen = "*"
+uvicorn = "*"
 
 [dev-packages]
 pytest = "*"
