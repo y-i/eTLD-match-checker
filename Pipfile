@@ -7,7 +7,7 @@ name = "pypi"
 format = "pysen run format"
 lint = "pysen run lint"
 server = "uvicorn src.server.main:app --reload --reload-dir src/*"
-render = "uvicorn src.server.main:app"
+render = "uvicorn src.server.main:app --host 0.0.0.0 --port 10000"
 test = "pytest --durations=5 --cov-report term-missing --cov=src"
 
 [packages]
