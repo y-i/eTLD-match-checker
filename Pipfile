@@ -15,6 +15,7 @@ fastapi = "*"
 aiofiles = "*"
 pysen = "*"
 uvicorn = "*"
+typing-extensions = "*"
 
 [dev-packages]
 pytest = "*"
