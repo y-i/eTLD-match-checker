@@ -1,13 +1,7 @@
-[tool.pysen]
-version = "0.9"
+[tool.pytest.ini_options]
+pythonpath = [
+  "."
+]
 
-[tool.pysen.lint]
-enable_black = true
-enable_flake8 = true
-enable_isort = true
-enable_mypy = true
-mypy_preset = "strict"
-py_version = "py38"
-
-[[tool.pysen.lint.mypy_targets]]
-paths = ["src", "src/server", "test", "test/server"]
+[tool.ruff.format]
+quote-style="single"
