@@ -9,7 +9,12 @@ jobs:
   deploy:
     name: Deploy to render.com
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        shell: bash
     steps:
+      - uses: actions/checkout@v5
       - uses: ttskch/render-deploy@v1.0.0
         with:
           api-key: ${{ secrets.RENDER_API_KEY }}
