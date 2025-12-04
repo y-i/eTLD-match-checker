@@ -3,6 +3,7 @@ name: Auto deploy to render
 on:
   schedule:
     - cron: "35 16 */2 * *"
+  workflow_dispatch:
 
 jobs:
   deploy:
