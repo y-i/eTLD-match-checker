@@ -15,16 +15,6 @@ jobs:
         shell: bash
     steps:
       - uses: actions/checkout@v5
-      - name: Set up Python 3.12
-        uses: actions/setup-python@v6
-        with:
-          python-version: "3.12"
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-      - name: Fetch Public Suffix List
-        run: curl https://publicsuffix.org/list/public_suffix_list.dat | sed '/^$/d' | grep -v -- "//" > .github/ci/list.dat
-      - name: Convert to pickle
-        run: python .github/ci/to_pickle.py
       - uses: ttskch/render-deploy@v1.0.0
         with:
           api-key: ${{ secrets.RENDER_API_KEY }}
