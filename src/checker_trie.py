@@ -12,10 +12,10 @@ class TrieNode:
     def has(self, word: str) -> bool:
         return word in self.nodes
 
-    def get(self, word: str) -> "TrieNode":
+    def get(self, word: str) -> 'TrieNode':
         return self.nodes[word]
 
-    def add(self, word: str) -> "TrieNode":
+    def add(self, word: str) -> 'TrieNode':
         if word not in self.nodes:
             self.nodes[word] = TrieNode()
         return self.nodes[word]
@@ -62,7 +62,7 @@ class ETLDChecker(Checker):  # type: ignore
         if domain is None:
             return none_result
 
-        words = domain.lower().split(".")
+        words = domain.lower().split('.')
         if any(map(lambda x: len(x) == 0, words)):
             return none_result
 
@@ -71,9 +71,9 @@ class ETLDChecker(Checker):  # type: ignore
             return DomainResult(
                 is_valid=True,
                 data=DomainData(
-                    subdomain=".".join(words[: -suffix_len - 1]),
-                    root_domain=".".join(words[-suffix_len - 1 :]),
-                    etld=".".join(words[-suffix_len:]),
+                    subdomain='.'.join(words[: -suffix_len - 1]),
+                    root_domain='.'.join(words[-suffix_len - 1 :]),
+                    etld='.'.join(words[-suffix_len:]),
                     tld=words[-1],
                 ),
             )
@@ -85,9 +85,9 @@ class ETLDChecker(Checker):  # type: ignore
             return DomainResult(
                 is_valid=True,
                 data=DomainData(
-                    subdomain=".".join(words[: -suffix_len - 1]),
-                    root_domain=".".join(words[-suffix_len - 1 :]),
-                    etld=".".join(words[-suffix_len:]),
+                    subdomain='.'.join(words[: -suffix_len - 1]),
+                    root_domain='.'.join(words[-suffix_len - 1 :]),
+                    etld='.'.join(words[-suffix_len:]),
                     tld=words[-1],
                 ),
             )
@@ -99,9 +99,9 @@ class ETLDChecker(Checker):  # type: ignore
             return DomainResult(
                 is_valid=True,
                 data=DomainData(
-                    subdomain=".".join(words[: -suffix_len - 1]),
-                    root_domain=".".join(words[-suffix_len - 1 :]),
-                    etld=".".join(words[-suffix_len:]),
+                    subdomain='.'.join(words[: -suffix_len - 1]),
+                    root_domain='.'.join(words[-suffix_len - 1 :]),
+                    etld='.'.join(words[-suffix_len:]),
                     tld=words[-1],
                 ),
             )
@@ -109,12 +109,12 @@ class ETLDChecker(Checker):  # type: ignore
         return none_result
 
     def initialize_from_file(self, filename: str) -> None:
-        with open(filename, encoding="utf-8") as f:
+        with open(filename, encoding='utf-8') as f:
             for line in f:
                 suffix = line.strip()
-                if suffix[0] == "!":
-                    self.exception_suffix_list.add(suffix[1:].split("."))
-                elif suffix[0] == "*":
-                    self.wildcard_suffix_list.add(suffix[2:].split("."))
+                if suffix[0] == '!':
+                    self.exception_suffix_list.add(suffix[1:].split('.'))
+                elif suffix[0] == '*':
+                    self.wildcard_suffix_list.add(suffix[2:].split('.'))
                 else:
-                    self.normal_suffix_list.add(suffix.split("."))
+                    self.normal_suffix_list.add(suffix.split('.'))
