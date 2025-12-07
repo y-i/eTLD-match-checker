@@ -1,7 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:semverAllWeekly"
+    "config:semverAllWeekly",
+    ":disableDependencyDashboard"
   ],
   "branchConcurrentLimit": 3,
   "labels": ["renovate"],
